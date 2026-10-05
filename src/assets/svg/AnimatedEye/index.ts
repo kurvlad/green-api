@@ -1,0 +1,1 @@
+export { AnimatedEye } from './AnimatedEye';

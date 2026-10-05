@@ -1,0 +1,43 @@
+.container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.buttons__section {
+    display: flex;
+    gap: 6px;
+}
+
+.button {
+    display: -webkit-box;
+    overflow: hidden;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.description {
+    position: absolute;
+    bottom: -15px;
+    color: var(--secondary-color);
+    font-size: 10px;
+    opacity: 0.8;
+}
+
+.reset {
+    display: block;
+    cursor: pointer;
+}
+
+.clearButton {
+    width: fit-content;
+    min-width: 38px;
+    padding-right: 12px;
+    padding-left: 12px;
+}

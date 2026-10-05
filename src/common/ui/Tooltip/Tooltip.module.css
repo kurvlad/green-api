@@ -1,0 +1,55 @@
+.tooltip__trigger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+    background-color: transparent;
+    border: none;
+}
+
+.tooltip__content {
+    z-index: 999999999999;
+    display: flex;
+    min-width: 50px;
+    max-width: 350px;
+    padding: 8px 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    row-gap: 8px;
+    color: var(--black-color);
+    font-size: 12px;
+    font-weight: 400;
+    text-align: start;
+    background-color: var(--white-color);
+    border-radius: 10px;
+    box-shadow: 0 0 10px 5px rgb(0 0 0 / 5%);
+    animation-duration: 300ms;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+
+.tooltip__content[data-state="delayed-open"][data-side="top"] {
+    animation-name: open;
+}
+
+.tooltip__arrow {
+    color: var(--white-color);
+}
+
+.tooltip__arrow * {
+    fill: currentcolor;
+}
+
+@keyframes open {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

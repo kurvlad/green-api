@@ -1,0 +1,1 @@
+export { LogoOneAnimate } from './LogoOneAnimate';

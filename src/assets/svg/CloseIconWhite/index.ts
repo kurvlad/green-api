@@ -1,0 +1,1 @@
+export { CloseIconWhite } from './CloseIconWhite';

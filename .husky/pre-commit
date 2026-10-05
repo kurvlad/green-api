@@ -1,0 +1,4 @@
+pnpm run lint:fix
+pnpm run stylelint:fix 
+pnpm run format
+git add .
