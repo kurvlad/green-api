@@ -1,11 +1,15 @@
-import { useLoginMutation } from '@app/api/queries/auth';
+import { apiClient } from '@app/api/apiClient';
+import { endpoints } from '@app/api/greenApi.constants';
 import { setLocalStorageItem } from '@app/app/localStorage/localStorage';
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '@app/app/localStorage/localStorage.constants';
+import {
+    API_TOKEN_INSTANCE,
+    ID_INSTANCE,
+} from '@app/app/localStorage/localStorage.constants';
 import { routerUrls } from '@app/app/router/router.urls';
 import { Button } from '@app/common';
 import { Input } from '@app/common/ui/Input';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -16,9 +20,6 @@ import { type LoginForm, loginFormSchema } from './LoginPage.schema';
 const LoginPage = () => {
     const navigate = useNavigate();
 
-    const [isHowButtonHover, setIsHowButtonHover] = useState(false);
-    const [isWhatButtonHover, setIsWhatButtonHover] = useState(false);
-
     const {
         register,
         handleSubmit,
@@ -27,75 +28,54 @@ const LoginPage = () => {
         resolver: zodResolver(loginFormSchema),
     });
 
-    const { mutate: loginMutate, isPending: isLoginPending } = useLoginMutation({
-        onSuccess: ({ data }) => {
-            const { status, token, refresh_token } = data;
+    const { mutate: checkCredentials, isPending } = useMutation({
+        mutationFn: async (data: LoginForm) => {
+            const { data: settings } = await apiClient.get(
+                endpoints.getSettings(data.idInstance, data.apiTokenInstance),
+            );
 
-            if (status) {
-                setLocalStorageItem(ACCESS_TOKEN, token);
-                setLocalStorageItem(REFRESH_TOKEN, refresh_token);
-                navigate(routerUrls.getHomePageUrl());
-            }
+            return settings;
         },
-        onError: (error) => {
-            const { status } = error;
-
-            switch (status) {
-                case 401:
-                    toast.error('Ошибка авторизации, попробуйте снова');
-                    break;
-            }
+        onSuccess: (_, variables) => {
+            setLocalStorageItem(ID_INSTANCE, variables.idInstance);
+            setLocalStorageItem(API_TOKEN_INSTANCE, variables.apiTokenInstance);
+            navigate(routerUrls.getHomePageUrl());
+        },
+        onError: () => {
+            toast.error('Не удалось авторизоваться. Проверьте idInstance и apiTokenInstance');
         },
     });
 
     const onSubmit = (data: LoginForm) => {
-        loginMutate({
-            username: data.login,
-            password: data.password,
-        });
+        checkCredentials(data);
     };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.login__form}>
-            <h1 className={styles.form__title}>Вход в систему</h1>
+            <h1 className={styles.form__title}>Вход в GREEN-API</h1>
 
-            <span
-                onMouseEnter={() => setIsHowButtonHover(true)}
-                onMouseLeave={() => setIsHowButtonHover(false)}
-                className={styles.help__title}
-            >
-                {isHowButtonHover ? 'Логин: Familiya.IO | Пароль: *******' : 'Как выглядит логин и пароль?'}
+            <span className={styles.help__title}>
+                Данные находятся в личном кабинете GREEN-API
             </span>
 
             <Input
-                {...register('login')}
-                errorMessage={errors.login?.message}
-                placeholder="Логин"
+                {...register('idInstance')}
+                errorMessage={errors.idInstance?.message}
+                placeholder="idInstance"
                 required
                 inputClassName={styles.input}
-                autoComplete="username"
+                autoComplete="off"
             />
             <Input
-                {...register('password')}
-                errorMessage={errors.password?.message}
-                placeholder="Пароль"
+                {...register('apiTokenInstance')}
+                errorMessage={errors.apiTokenInstance?.message}
+                placeholder="apiTokenInstance"
                 required
                 inputClassName={styles.input}
-                autoComplete="current-password"
-                type="password"
+                autoComplete="off"
             />
 
-            <span
-                onMouseEnter={() => setIsWhatButtonHover(true)}
-                onMouseLeave={() => setIsWhatButtonHover(false)}
-                className={styles.help__title}
-            >
-                {isWhatButtonHover
-                    ? 'Необходимо обратиться в управление РГИТ'
-                    : 'Что делать, если я не помню свой пароль?'}
-            </span>
-
-            <Button isLoading={isLoginPending} className={styles.login__button} type="submit">
+            <Button isLoading={isPending} className={styles.login__button} type="submit">
                 Войти
             </Button>
         </form>
