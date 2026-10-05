@@ -9,7 +9,6 @@ export const store = configureStore({
     reducer: combinedReducers,
 });
 
-// Типизация для всего хранилища
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 

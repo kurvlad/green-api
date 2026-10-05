@@ -4,10 +4,10 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm i -g pnpm
+RUN npm i -g pnpm@10
 RUN pnpm install
 
-COPY . . 
+COPY . .
 
 RUN pnpm build
 

@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 
 import type { SelectProps } from './Select.interface';
-import styles from './select.module.css';
+import styles from './Select.module.css';
 
 export const Select = ({
     options,

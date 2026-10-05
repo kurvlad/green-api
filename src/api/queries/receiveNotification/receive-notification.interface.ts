@@ -42,3 +42,8 @@ export interface ReceiveNotificationResponse {
     receiptId: number;
     body: ReceiveNotificationBody;
 }
+
+export interface ReceiveNotificationPayload {
+    idInstance: string;
+    apiTokenInstance: string;
+}

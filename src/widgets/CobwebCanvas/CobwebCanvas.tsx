@@ -22,28 +22,25 @@ export const CobwebCanvas: React.FC = () => {
         let animationFrameId: number;
         let particles: Particle[] = [];
 
-        // Настройки анимации
-        const PARTICLE_COUNT = 300; // Количество точек
-        const CONNECTION_DISTANCE = 120; // Максимальная длина нити паутины
-        const MOUSE_DISTANCE = 180; // Радиус притяжения к мыши
+        const PARTICLE_COUNT = 300;
+        const CONNECTION_DISTANCE = 120;
+        const MOUSE_DISTANCE = 180;
 
-        // Адаптивный размер холста
         const resizeCanvas = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             initParticles();
         };
 
-        // Инициализация точек
         const initParticles = () => {
             particles = [];
             for (let i = 0; i < PARTICLE_COUNT; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 1, // Скорость по X
-                    vy: (Math.random() - 0.5) * 1, // Скорость по Y
-                    radius: Math.random() * 2 + 1, // Размер точки
+                    vx: (Math.random() - 0.5) * 1,
+                    vy: (Math.random() - 0.5) * 1,
+                    radius: Math.random() * 2 + 1,
                 });
             }
         };
