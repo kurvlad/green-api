@@ -1,10 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
 import { getLocalStorageItem } from '../localStorage/localStorage';
-import {
-    API_TOKEN_INSTANCE,
-    ID_INSTANCE,
-} from '../localStorage/localStorage.constants';
+import { API_TOKEN_INSTANCE, ID_INSTANCE } from '../localStorage/localStorage.constants';
 import { routerNames } from './router.names';
 
 const PrivateRoute = () => {

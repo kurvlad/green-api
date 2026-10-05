@@ -253,4 +253,16 @@ address {
 
     /* box-shadow */
     --base-box-shadow: 4px 4px 25px 0px rgb(0 0 0 / 35%);
+
+    /* chat */
+    --chat-background: #e6ebee;
+    --chat-background-secondary: #f0f2f5;
+    --chat-background-secondary-hover: #e9ebee;
+    --chat-outgoing-bubble: #dcf8c6;
+    --chat-text-primary: #1c1e21;
+    --chat-text-secondary: #8a8d91;
+    --chat-accent: var(--primary-color);
+    --chat-accent-hover: var(--primary-active-color);
+    --chat-border-color: #e4e6eb;
+    --chat-overlay: rgb(0 0 0 / 50%);
 }

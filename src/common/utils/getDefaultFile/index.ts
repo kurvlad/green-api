@@ -1,1 +1,0 @@
-export { getDefaultFile } from './getDefaultFile';

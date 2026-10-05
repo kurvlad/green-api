@@ -1,0 +1,48 @@
+.message {
+    display: flex;
+    max-width: 65%;
+}
+
+.sender {
+    display: block;
+    margin-bottom: 2px;
+    color: var(--chat-accent);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.incoming {
+    align-self: flex-start;
+}
+
+.outgoing {
+    align-self: flex-end;
+}
+
+.bubble {
+    position: relative;
+    padding: 8px 12px 20px;
+    color: var(--chat-text-primary);
+    font-size: 14px;
+    line-height: 20px;
+    word-break: break-word;
+    background-color: var(--background);
+    border-radius: 12px;
+    overflow-wrap: anywhere;
+}
+
+.outgoing .bubble {
+    background-color: var(--chat-outgoing-bubble);
+}
+
+.text {
+    white-space: pre-wrap;
+}
+
+.time {
+    position: absolute;
+    right: 8px;
+    bottom: 4px;
+    color: var(--chat-text-secondary);
+    font-size: 11px;
+}

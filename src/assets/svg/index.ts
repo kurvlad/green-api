@@ -9,5 +9,6 @@ export * from './LogoOneAnimate';
 export * from './LogoWhite';
 export * from './Navigate';
 export * from './Play';
+export * from './PlusSvg';
 export * from './Upload';
 export * from './Zoom';

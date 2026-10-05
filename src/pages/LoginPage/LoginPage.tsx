@@ -1,10 +1,7 @@
 import { apiClient } from '@app/api/apiClient';
 import { endpoints } from '@app/api/greenApi.constants';
 import { setLocalStorageItem } from '@app/app/localStorage/localStorage';
-import {
-    API_TOKEN_INSTANCE,
-    ID_INSTANCE,
-} from '@app/app/localStorage/localStorage.constants';
+import { API_TOKEN_INSTANCE, ID_INSTANCE } from '@app/app/localStorage/localStorage.constants';
 import { routerUrls } from '@app/app/router/router.urls';
 import { Button } from '@app/common';
 import { Input } from '@app/common/ui/Input';
@@ -12,7 +9,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 import styles from './LoginPage.module.css';
 import { type LoginForm, loginFormSchema } from './LoginPage.schema';
@@ -31,7 +27,7 @@ const LoginPage = () => {
     const { mutate: checkCredentials, isPending } = useMutation({
         mutationFn: async (data: LoginForm) => {
             const { data: settings } = await apiClient.get(
-                endpoints.getSettings(data.idInstance, data.apiTokenInstance),
+                endpoints.getSettings(data.idInstance, data.apiTokenInstance)
             );
 
             return settings;
@@ -40,9 +36,6 @@ const LoginPage = () => {
             setLocalStorageItem(ID_INSTANCE, variables.idInstance);
             setLocalStorageItem(API_TOKEN_INSTANCE, variables.apiTokenInstance);
             navigate(routerUrls.getHomePageUrl());
-        },
-        onError: () => {
-            toast.error('Не удалось авторизоваться. Проверьте idInstance и apiTokenInstance');
         },
     });
 
@@ -54,9 +47,7 @@ const LoginPage = () => {
         <form onSubmit={handleSubmit(onSubmit)} className={styles.login__form}>
             <h1 className={styles.form__title}>Вход в GREEN-API</h1>
 
-            <span className={styles.help__title}>
-                Данные находятся в личном кабинете GREEN-API
-            </span>
+            <span className={styles.help__title}>Данные находятся в личном кабинете GREEN-API</span>
 
             <Input
                 {...register('idInstance')}

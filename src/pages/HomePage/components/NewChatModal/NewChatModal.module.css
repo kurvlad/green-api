@@ -1,0 +1,83 @@
+.overlay {
+    position: fixed;
+    z-index: var(--z-index-higher);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--chat-overlay);
+    inset: 0;
+}
+
+.modal {
+    display: flex;
+    width: clamp(300px, 90%, 420px);
+    padding: 24px;
+    flex-direction: column;
+    gap: 12px;
+    background-color: var(--background);
+    border-radius: var(--border-radius);
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.hint {
+    color: var(--chat-text-secondary);
+    font-size: 13px;
+}
+
+.input {
+    padding: 10px 14px;
+    color: var(--chat-text-primary);
+    font-size: 14px;
+    border: 1px solid var(--chat-border-color);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input:focus {
+    border-color: var(--chat-accent);
+}
+
+.error {
+    color: var(--danger-color);
+    font-size: 12px;
+}
+
+.actions {
+    display: flex;
+    margin-top: 4px;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.cancel,
+.create {
+    padding: 8px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.cancel {
+    color: var(--chat-text-primary);
+    background-color: var(--chat-background-secondary);
+}
+
+.cancel:hover {
+    background-color: var(--chat-background-secondary-hover);
+}
+
+.create {
+    color: var(--white-color);
+    background-color: var(--chat-accent);
+}
+
+.create:hover {
+    background-color: var(--chat-accent-hover);
+}
